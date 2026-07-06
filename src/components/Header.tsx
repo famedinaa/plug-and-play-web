@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import { business, whatsappLink } from "@/lib/content";
 
 const NAV_LINKS = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/catalogo", label: "Catálogo" },
+  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export function Header() {
@@ -17,9 +19,9 @@ export function Header() {
         </a>
         <nav className="hidden gap-8 text-sm font-medium text-neutral-600 md:flex">
           {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-neutral-950">
+            <Link key={l.href} href={l.href} className="hover:text-neutral-950">
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <a

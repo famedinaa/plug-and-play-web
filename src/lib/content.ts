@@ -193,6 +193,47 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
 
+export interface SoftwareProduct {
+  slug: string;
+  name: string;
+  /** Frase corta para el hero de la ficha del sistema. */
+  tagline: string;
+  /** Bajada corta, usada en la tarjeta del catálogo. */
+  description: string;
+  /** "¿Qué incluye?" — funciones concretas del sistema. */
+  highlights: string[];
+  /** Capturas de pantalla. Se buscan en /public/images/catalogo/<slug>/. */
+  screenshots: GalleryImage[];
+  /** Mensaje pre-cargado del botón de WhatsApp en la ficha del sistema. */
+  whatsappMessage: string;
+}
+
+// COMPLETAR: reemplazar estos 6 sistemas placeholder por los reales
+// (nombre, descripción, funciones y capturas de cada uno).
+export const softwareCatalog: SoftwareProduct[] = Array.from({ length: 6 }, (_, i) => {
+  const n = i + 1;
+  return {
+    slug: `sistema-${n}`,
+    name: `Sistema ${n}`, // COMPLETAR: nombre real del sistema
+    tagline: "COMPLETAR: frase corta que resuma el sistema.",
+    description: "COMPLETAR: bajada corta de qué hace este sistema.",
+    highlights: [
+      "COMPLETAR: función principal 1",
+      "COMPLETAR: función principal 2",
+      "COMPLETAR: función principal 3",
+    ],
+    screenshots: [
+      { filename: "captura-1.jpg", caption: "COMPLETAR: descripción de la captura" },
+      { filename: "captura-2.jpg", caption: "COMPLETAR: descripción de la captura" },
+    ],
+    whatsappMessage: `Hola! Quiero consultar sobre el Sistema ${n}.`, // COMPLETAR
+  };
+});
+
+export function getSoftwareBySlug(slug: string): SoftwareProduct | undefined {
+  return softwareCatalog.find((s) => s.slug === slug);
+}
+
 export const advantages = [
   "Diagnóstico sin cargo",
   "Repuestos de calidad",

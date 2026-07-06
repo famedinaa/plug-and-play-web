@@ -17,6 +17,7 @@ import { Footer } from "@/components/Footer";
 import { OtherServices } from "@/components/OtherServices";
 import { WorkshopGallery } from "@/components/WorkshopGallery";
 import { ServiceVisual } from "@/components/ServiceVisual";
+import { CatalogTeaser } from "@/components/CatalogTeaser";
 import { services, getServiceBySlug, whatsappLink, business } from "@/lib/content";
 
 const SLUGS_WITH_GALLERY = new Set(["reparacion-de-pcs", "reparacion-de-celulares"]);
@@ -143,6 +144,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         ) : (
           <ServiceVisual icon={Icon} />
         )}
+
+        {service.slug === "saas-a-medida" && <CatalogTeaser />}
 
         <OtherServices excludeSlug={service.slug} />
       </main>
