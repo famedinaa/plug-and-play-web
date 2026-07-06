@@ -16,6 +16,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OtherServices } from "@/components/OtherServices";
 import { WorkshopGallery } from "@/components/WorkshopGallery";
+import { ServiceVisual } from "@/components/ServiceVisual";
 import { services, getServiceBySlug, whatsappLink, business } from "@/lib/content";
 
 const SLUGS_WITH_GALLERY = new Set(["reparacion-de-pcs", "reparacion-de-celulares"]);
@@ -137,7 +138,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </a>
         </section>
 
-        {SLUGS_WITH_GALLERY.has(service.slug) && <WorkshopGallery />}
+        {SLUGS_WITH_GALLERY.has(service.slug) ? (
+          <WorkshopGallery />
+        ) : (
+          <ServiceVisual icon={Icon} />
+        )}
 
         <OtherServices excludeSlug={service.slug} />
       </main>

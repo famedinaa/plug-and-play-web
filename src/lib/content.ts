@@ -5,9 +5,11 @@ export const business = {
   name: "Plug and Play",
   description:
     "Especialista en mantenimiento informático. Reparación y mantenimiento de computadoras y celulares.",
-  whatsapp: "5490000000000", // COMPLETAR: número con código de país, sin "+" ni espacios
-  whatsappDisplay: "+54 9 000 000-0000", // COMPLETAR
-  instagram: "https://instagram.com/plugandplay", // COMPLETAR
+  whatsapp: "3454431534",
+  whatsappDisplay: "+54 9 3454 43-1534",
+  phone: "3454431534",
+  instagram: "https://www.instagram.com/plugandplayfederal",
+  instagramHandle: "@plugandplayfederal",
   email: "contacto@plugandplay.com", // COMPLETAR
   address: "General J. J. de Urquiza 1285, Federal, Entre Ríos",
   hours: [

@@ -1,5 +1,5 @@
-import { MapPin, Clock, MessageCircle, AtSign, Mail } from "lucide-react";
-import { business, whatsappLink } from "@/lib/content";
+import { MapPin, Clock, MessageCircle, AtSign, Mail, Phone } from "lucide-react";
+import { business, whatsappLink, mapEmbedUrl } from "@/lib/content";
 
 export function Contact() {
   return (
@@ -40,6 +40,15 @@ export function Contact() {
             </div>
           </div>
           <div className="flex items-start gap-3">
+            <Phone className="mt-0.5 shrink-0 text-blue-500" size={22} />
+            <div>
+              <p className="font-semibold">Teléfono</p>
+              <a href={`tel:+549${business.phone}`} className="text-neutral-600 hover:text-blue-600">
+                {business.whatsappDisplay}
+              </a>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
             <Mail className="mt-0.5 shrink-0 text-blue-500" size={22} />
             <div>
               <p className="font-semibold">Email</p>
@@ -58,14 +67,20 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="text-neutral-600 hover:text-blue-600"
               >
-                @plugandplay
+                {business.instagramHandle}
               </a>
             </div>
           </div>
         </div>
-        <div className="flex h-full min-h-64 flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 text-center text-sm text-neutral-500">
-          <span>Acá va el mapa del local</span>
-          <span>(agregar embed de Google Maps con la dirección real)</span>
+        <div className="h-full min-h-64 overflow-hidden rounded-2xl border border-neutral-200">
+          <iframe
+            src={mapEmbedUrl()}
+            title="Ubicación de Plug and Play"
+            className="h-full w-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </div>
     </section>
