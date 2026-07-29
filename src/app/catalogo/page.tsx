@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AppWindow, ArrowRight } from "lucide-react";
+import { ArrowRight, Wrench, FlaskConical, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ImageSlot } from "@/components/ImageSlot";
 import { business, softwareCatalog } from "@/lib/content";
+
+const ICONS: Record<string, LucideIcon> = {
+  wrench: Wrench,
+  "flask-conical": FlaskConical,
+};
 
 export const metadata: Metadata = {
   title: `Catálogo de software — ${business.name}`,
@@ -31,28 +36,33 @@ export default function CatalogoPage() {
 
         <section className="mx-auto max-w-6xl px-6 py-16">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {softwareCatalog.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/catalogo/${s.slug}`}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-200 shadow-sm transition hover:-translate-y-1 hover:border-neutral-300 hover:shadow-md"
-              >
-                <div className="relative h-44 bg-neutral-100 p-3">
-                  <ImageSlot image={s.screenshots[0]} folder={`catalogo/${s.slug}`} fit="contain" />
-                  <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-950 text-white shadow-md">
-                    <AppWindow size={18} />
+            {softwareCatalog.map((s) => {
+              const Icon = ICONS[s.icon];
+              return (
+                <Link
+                  key={s.slug}
+                  href={`/catalogo/${s.slug}`}
+                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-200 shadow-sm transition hover:-translate-y-1 hover:border-neutral-300 hover:shadow-md"
+                >
+                  <div className="h-44 bg-neutral-100 p-3">
+                    <ImageSlot image={s.screenshots[0]} folder={`catalogo/${s.slug}`} fit="contain" />
                   </div>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h2 className="text-lg font-semibold">{s.name}</h2>
-                  <p className="mt-1.5 text-sm text-neutral-600">{s.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue-600">
-                    Ver más
-                    <ArrowRight size={15} className="transition group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-neutral-950 text-white">
+                        <Icon size={17} />
+                      </div>
+                      <h2 className="text-lg font-semibold">{s.name}</h2>
+                    </div>
+                    <p className="mt-2.5 text-sm text-neutral-600">{s.description}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue-600">
+                      Ver más
+                      <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
 

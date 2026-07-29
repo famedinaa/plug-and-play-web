@@ -197,11 +197,14 @@ export function getServiceBySlug(slug: string): Service | undefined {
 
 export interface SoftwareProduct {
   slug: string;
+  icon: "wrench" | "flask-conical";
   name: string;
   /** Frase corta para el hero de la ficha del sistema. */
   tagline: string;
   /** Bajada corta, usada en la tarjeta del catálogo. */
   description: string;
+  /** Pregunta/gancho comercial — banner debajo del hero de la ficha del sistema. */
+  hook: string;
   /** "¿Qué incluye?" — funciones concretas del sistema. */
   highlights: string[];
   /** Capturas de pantalla. Se buscan en /public/images/catalogo/<slug>/. */
@@ -213,10 +216,12 @@ export interface SoftwareProduct {
 export const softwareCatalog: SoftwareProduct[] = [
   {
     slug: "fierros",
+    icon: "wrench",
     name: "FierrOS",
     tagline: "El sistema de gestión para tu taller mecánico, de punta a punta.",
     description:
       "Clientes, vehículos, órdenes, presupuestos y turnos en un solo lugar, con PDF profesional y WhatsApp integrado.",
+    hook: "¿Necesitás mejorar la gestión de tu taller? Tenemos la solución para organizarte.",
     highlights: [
       "Clientes y vehículos con historial completo por patente",
       "Órdenes de trabajo con ítems, diagnóstico y cálculo automático de totales",
@@ -238,6 +243,36 @@ export const softwareCatalog: SoftwareProduct[] = [
       { filename: "editor-pdf.png", caption: "Editor visual del PDF de orden y presupuesto" },
     ],
     whatsappMessage: "Hola! Quiero consultar sobre FierrOS, el sistema de gestión para talleres.",
+  },
+  {
+    slug: "labosys",
+    icon: "flask-conical",
+    name: "LaboSys",
+    tagline: "El sistema de información para tu laboratorio de análisis clínicos.",
+    description:
+      "Pacientes, órdenes, resultados y caja en un solo lugar, con protocolos en PDF y envío por WhatsApp.",
+    hook: "¿Necesitás ordenar la gestión de tu laboratorio? Tenemos la solución para organizarte.",
+    highlights: [
+      "Pacientes con legajo, coberturas e historial completo de estudios",
+      "Órdenes en 4 pasos: paciente, datos, prácticas y resumen",
+      "Carga de resultados con validación y valores fuera de rango",
+      "Protocolos en PDF y envío de resultados por WhatsApp",
+      "Agenda semanal de turnos por paciente y médico",
+      "Caja diaria con cobros, deudores y recaudación por obra social",
+      "Nomenclador de prácticas y paneles con precios y valores de referencia",
+      "Médicos derivantes y obras sociales con aranceles propios",
+      "Dashboard con órdenes del día, recaudación y distribución por cobertura",
+      "Listados y reportes de producción por obra social, sección y médico",
+    ],
+    screenshots: [
+      { filename: "dashboard.png", caption: "Dashboard con órdenes del día y distribución por obra social" },
+      { filename: "pacientes.png", caption: "Listado de pacientes con legajo y cobertura" },
+      { filename: "nueva-orden.png", caption: "Alta de orden guiada en 4 pasos" },
+      { filename: "agenda.png", caption: "Agenda semanal de turnos" },
+      { filename: "caja.png", caption: "Caja diaria con cobros y deudores" },
+      { filename: "practicas.png", caption: "Nomenclador de prácticas con precios" },
+    ],
+    whatsappMessage: "Hola! Quiero consultar sobre LaboSys, el sistema para laboratorios de análisis clínicos.",
   },
 ];
 

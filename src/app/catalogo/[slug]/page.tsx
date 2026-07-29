@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, AppWindow, CheckCircle2, MessageCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  Wrench,
+  FlaskConical,
+  CheckCircle2,
+  MessageCircle,
+  type LucideIcon,
+} from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OtherSoftware } from "@/components/OtherSoftware";
 import { Gallery } from "@/components/Gallery";
 import { ImageSlot } from "@/components/ImageSlot";
 import { softwareCatalog, getSoftwareBySlug, whatsappLink, business } from "@/lib/content";
+
+const ICONS: Record<string, LucideIcon> = {
+  wrench: Wrench,
+  "flask-conical": FlaskConical,
+};
 
 export function generateStaticParams() {
   return softwareCatalog.map((s) => ({ slug: s.slug }));
@@ -31,6 +43,7 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const product = getSoftwareBySlug(slug);
   if (!product) notFound();
+  const Icon = ICONS[product.icon];
 
   return (
     <>
@@ -50,7 +63,7 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
               <div>
                 <div className="flex items-start gap-4">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-neutral-950">
-                    <AppWindow size={26} />
+                    <Icon size={26} />
                   </div>
                   <div>
                     <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{product.name}</h1>
@@ -83,6 +96,12 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="border-b border-neutral-200 bg-blue-50 py-10">
+          <p className="mx-auto max-w-3xl px-6 text-center text-xl font-bold tracking-tight text-neutral-900 md:text-2xl">
+            {product.hook}
+          </p>
         </section>
 
         <section className="mx-auto max-w-4xl px-6 py-16">
