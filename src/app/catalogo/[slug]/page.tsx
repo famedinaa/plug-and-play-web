@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   Wrench,
   FlaskConical,
+  Fingerprint,
   CheckCircle2,
   MessageCircle,
   type LucideIcon,
@@ -19,6 +20,7 @@ import { softwareCatalog, getSoftwareBySlug, whatsappLink, business } from "@/li
 const ICONS: Record<string, LucideIcon> = {
   wrench: Wrench,
   "flask-conical": FlaskConical,
+  fingerprint: Fingerprint,
 };
 
 export function generateStaticParams() {

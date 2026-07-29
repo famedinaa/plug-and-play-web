@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Wrench, FlaskConical, type LucideIcon } from "lucide-react";
+import { ArrowRight, Wrench, FlaskConical, Fingerprint, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ImageSlot } from "@/components/ImageSlot";
@@ -9,6 +9,7 @@ import { business, softwareCatalog } from "@/lib/content";
 const ICONS: Record<string, LucideIcon> = {
   wrench: Wrench,
   "flask-conical": FlaskConical,
+  fingerprint: Fingerprint,
 };
 
 export const metadata: Metadata = {

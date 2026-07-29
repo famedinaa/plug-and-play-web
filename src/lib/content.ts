@@ -197,7 +197,7 @@ export function getServiceBySlug(slug: string): Service | undefined {
 
 export interface SoftwareProduct {
   slug: string;
-  icon: "wrench" | "flask-conical";
+  icon: "wrench" | "flask-conical" | "fingerprint";
   name: string;
   /** Frase corta para el hero de la ficha del sistema. */
   tagline: string;
@@ -273,6 +273,36 @@ export const softwareCatalog: SoftwareProduct[] = [
       { filename: "practicas.png", caption: "Nomenclador de prácticas con precios" },
     ],
     whatsappMessage: "Hola! Quiero consultar sobre LaboSys, el sistema para laboratorios de análisis clínicos.",
+  },
+  {
+    slug: "gymaccess",
+    icon: "fingerprint",
+    name: "GymAccess",
+    tagline: "Control de acceso para tu gimnasio, con molinete y huella digital.",
+    description:
+      "Verificación por huella o DNI en el molinete, gestión de socios y cuotas, y un sistema de racha y puntos que motiva a que vuelvan.",
+    hook: "¿Necesitás controlar el acceso y las cuotas de tu gimnasio? Tenemos la solución para organizarte.",
+    highlights: [
+      "Verificación de acceso por huella digital o DNI en el molinete",
+      "Molinete controlado por Arduino con sensor de huellas, sin depender de internet",
+      "Gestión de socios: Habilitado, Vencido, Baja, Pase Total y Staff",
+      "Registro de pagos con lectura automática de comprobantes (OCR, sin servicios externos)",
+      "Sistema de racha y puntos que premia la asistencia y motiva a volver",
+      "Recompensas canjeables por descuento en la cuota",
+      "Estadísticas de concurrencia por hora y por día para saber cuándo se llena",
+      "Mensajes de WhatsApp individuales o masivos a socios",
+      "Modo Kiosco y segundo monitor para la recepción",
+      "Funciona 100% local, sin costo mensual ni conexión a internet",
+    ],
+    screenshots: [
+      { filename: "acceso.png", caption: "Pantalla de verificación por DNI con dashboard del día" },
+      { filename: "acceso-ok.png", caption: "Acceso permitido, con racha y puntos del socio" },
+      { filename: "socios.png", caption: "Listado de socios con estado y vencimiento" },
+      { filename: "ficha.png", caption: "Ficha de socio con pagos, racha y puntos" },
+      { filename: "estadisticas.png", caption: "Estadísticas de concurrencia por hora y por día" },
+      { filename: "config.png", caption: "Configuración: planes, motivación, WhatsApp y seguridad" },
+    ],
+    whatsappMessage: "Hola! Quiero consultar sobre GymAccess, el sistema de control de acceso para gimnasios.",
   },
 ];
 

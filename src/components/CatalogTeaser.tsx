@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Wrench, FlaskConical, type LucideIcon } from "lucide-react";
+import { ArrowRight, Wrench, FlaskConical, Fingerprint, type LucideIcon } from "lucide-react";
 import { softwareCatalog } from "@/lib/content";
 
 const ICONS: Record<string, LucideIcon> = {
   wrench: Wrench,
   "flask-conical": FlaskConical,
+  fingerprint: Fingerprint,
 };
 
 export function CatalogTeaser() {
