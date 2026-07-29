@@ -4,6 +4,7 @@ import { softwareCatalog } from "@/lib/content";
 
 export function OtherSoftware({ excludeSlug }: { excludeSlug: string }) {
   const others = softwareCatalog.filter((s) => s.slug !== excludeSlug);
+  if (others.length === 0) return null;
 
   return (
     <section className="border-t border-neutral-200 bg-neutral-50 py-16">

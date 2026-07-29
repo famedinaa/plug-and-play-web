@@ -208,27 +208,36 @@ export interface SoftwareProduct {
   whatsappMessage: string;
 }
 
-// COMPLETAR: reemplazar estos 6 sistemas placeholder por los reales
-// (nombre, descripción, funciones y capturas de cada uno).
-export const softwareCatalog: SoftwareProduct[] = Array.from({ length: 6 }, (_, i) => {
-  const n = i + 1;
-  return {
-    slug: `sistema-${n}`,
-    name: `Sistema ${n}`, // COMPLETAR: nombre real del sistema
-    tagline: "COMPLETAR: frase corta que resuma el sistema.",
-    description: "COMPLETAR: bajada corta de qué hace este sistema.",
+export const softwareCatalog: SoftwareProduct[] = [
+  {
+    slug: "fierros",
+    name: "FierrOS",
+    tagline: "El sistema de gestión para tu taller mecánico, de punta a punta.",
+    description:
+      "Clientes, vehículos, órdenes, presupuestos y turnos en un solo lugar, con PDF profesional y WhatsApp integrado.",
     highlights: [
-      "COMPLETAR: función principal 1",
-      "COMPLETAR: función principal 2",
-      "COMPLETAR: función principal 3",
+      "Clientes y vehículos con historial completo por patente",
+      "Órdenes de trabajo con ítems, diagnóstico y cálculo automático de totales",
+      "Presupuestos con estados y conversión a orden con un clic",
+      "PDF profesional de orden y presupuesto, con editor visual de estilos y logo propio",
+      "Envío por WhatsApp con mensaje pre-cargado al cliente",
+      "Agenda de turnos del taller",
+      "Inventario de repuestos con alertas de stock bajo y proveedores",
+      "Dashboard con facturación mensual/anual y top clientes",
+      "Multi-sucursal y multi-usuario con roles",
+      "Backup automático a Google Drive y exportación de datos",
     ],
     screenshots: [
-      { filename: "captura-1.jpg", caption: "COMPLETAR: descripción de la captura" },
-      { filename: "captura-2.jpg", caption: "COMPLETAR: descripción de la captura" },
+      { filename: "dashboard.png", caption: "Dashboard con facturación y últimas órdenes" },
+      { filename: "vehiculo-detalle.png", caption: "Ficha de vehículo con patente e historial" },
+      { filename: "nueva-orden.png", caption: "Carga de una orden de trabajo completa" },
+      { filename: "presupuestos.png", caption: "Presupuestos con estados y seguimiento" },
+      { filename: "turnos.png", caption: "Agenda de turnos del taller" },
+      { filename: "editor-pdf.png", caption: "Editor visual del PDF de orden y presupuesto" },
     ],
-    whatsappMessage: `Hola! Quiero consultar sobre el Sistema ${n}.`, // COMPLETAR
-  };
-});
+    whatsappMessage: "Hola! Quiero consultar sobre FierrOS, el sistema de gestión para talleres.",
+  },
+];
 
 export function getSoftwareBySlug(slug: string): SoftwareProduct | undefined {
   return softwareCatalog.find((s) => s.slug === slug);
