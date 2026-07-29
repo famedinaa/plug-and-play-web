@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OtherSoftware } from "@/components/OtherSoftware";
 import { Gallery } from "@/components/Gallery";
+import { ImageSlot } from "@/components/ImageSlot";
 import { softwareCatalog, getSoftwareBySlug, whatsappLink, business } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -45,13 +46,40 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
               <ArrowLeft size={16} />
               Volver al catálogo
             </Link>
-            <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-neutral-950">
-                <AppWindow size={26} />
-              </div>
+            <div className="grid gap-10 md:grid-cols-2 md:items-center">
               <div>
-                <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{product.name}</h1>
-                <p className="mt-2 max-w-xl text-white/70">{product.tagline}</p>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-neutral-950">
+                    <AppWindow size={26} />
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{product.name}</h1>
+                    <p className="mt-2 max-w-xl text-white/70">{product.tagline}</p>
+                  </div>
+                </div>
+                <a
+                  href={whatsappLink(product.whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-400"
+                >
+                  <MessageCircle size={18} />
+                  Escribinos por WhatsApp
+                </a>
+              </div>
+              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-3.5 py-2.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                </div>
+                <div className="h-56 bg-white/5 p-2 sm:h-72">
+                  <ImageSlot
+                    image={product.screenshots[0]}
+                    folder={`catalogo/${product.slug}`}
+                    fit="contain"
+                  />
+                </div>
               </div>
             </div>
           </div>

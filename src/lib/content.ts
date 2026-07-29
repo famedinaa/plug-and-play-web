@@ -19,7 +19,9 @@ export const business = {
 };
 
 export function mapEmbedUrl(): string {
-  return `https://www.google.com/maps?q=${encodeURIComponent(business.address)}&output=embed`;
+  // Sin ", Argentina" Google geocodifica mal la dirección (la manda a San Luis,
+  // a más de 1000km de Federal, Entre Ríos) — el país desambigua el resultado.
+  return `https://www.google.com/maps?q=${encodeURIComponent(`${business.address}, Argentina`)}&output=embed`;
 }
 
 export interface GalleryImage {

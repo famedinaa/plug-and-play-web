@@ -10,6 +10,17 @@ export function Footer() {
           <span className="font-semibold text-white">{business.name}</span>
         </div>
         <p className="text-sm">
+          En colaboración con{" "}
+          <a
+            href="https://elradar.ar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-white/90 hover:text-white"
+          >
+            El Radar
+          </a>
+        </p>
+        <p className="text-sm">
           © {new Date().getFullYear()} {business.name}. Todos los derechos reservados.
         </p>
       </div>

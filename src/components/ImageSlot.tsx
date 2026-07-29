@@ -12,10 +12,12 @@ export function ImageSlot({
   image,
   folder = "taller",
   className = "",
+  fit = "cover",
 }: {
   image: GalleryImage;
   folder?: string;
   className?: string;
+  fit?: "cover" | "contain";
 }) {
   const exists = fs.existsSync(path.join(process.cwd(), "public", "images", folder, image.filename));
 
@@ -26,7 +28,7 @@ export function ImageSlot({
         alt={image.caption}
         width={480}
         height={360}
-        className={`h-full w-full object-cover ${className}`}
+        className={`h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"} ${className}`}
       />
     );
   }
