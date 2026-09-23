@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,10 +12,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Plug and Play — Reparación de PCs, celulares y tecnología",
+  title: "Plug and Play — Reparación de PCs, celulares y software a medida en Federal",
   description:
-    "Reparación de PCs y celulares, venta de artículos de tecnología, y próximamente desarrollo de SaaS a medida e impresión 3D.",
+    "Reparación de PCs y celulares, venta de tecnología y sistemas de gestión propios para negocios. Federal, Entre Ríos.",
 };
 
 export default function RootLayout({
@@ -26,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-white text-neutral-900">{children}</body>
+      <body className="flex min-h-full flex-col bg-paper font-sans text-ink">{children}</body>
     </html>
   );
 }

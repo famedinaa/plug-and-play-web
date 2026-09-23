@@ -16,6 +16,11 @@ export const business = {
     { day: "Lunes a viernes", time: "9:00 – 18:00" },
     { day: "Sábados", time: "9:00 – 13:00" },
   ],
+  /** Horario en formato máquina para el indicador "Abierto ahora". Días: 0 = domingo … 6 = sábado. */
+  schedule: [
+    { days: [1, 2, 3, 4, 5], open: 9, close: 18 },
+    { days: [6], open: 9, close: 13 },
+  ],
 };
 
 export function mapEmbedUrl(): string {
@@ -44,6 +49,18 @@ export const storefrontImage: GalleryImage = {
   caption: "Nuestro local",
 };
 
+/** Foto principal del inicio (hero). Se busca en /public/images/local/. */
+export const heroImage: GalleryImage = {
+  filename: "hero.jpg",
+  caption: "Mesa de trabajo de Plug and Play",
+};
+
+/** Foto de cada tarjeta de servicio en el inicio. Se buscan en /public/images/servicios/<slug>.jpg. */
+export function serviceImage(slug: string): GalleryImage {
+  const s = services.find((x) => x.slug === slug);
+  return { filename: `${slug}.jpg`, caption: s?.title ?? slug };
+}
+
 export function whatsappLink(message: string): string {
   return `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(message)}`;
 }
@@ -60,6 +77,8 @@ export interface Service {
   /** Bajada corta, usada en la tarjeta del inicio. */
   description: string;
   comingSoon?: boolean;
+  /** Frase corta extra para servicios "Próximamente" (ej. en qué estamos). */
+  teaser?: string;
   /** Frase corta para el hero de la página de detalle. */
   tagline: string;
   /** "¿Qué incluye?" — lista de puntos concretos del servicio. */
@@ -163,17 +182,37 @@ export const services: Service[] = [
   {
     slug: "saas-a-medida",
     icon: "code",
-    title: "Desarrollo de SaaS a medida",
-    description: "Software a medida para digitalizar y automatizar procesos de tu negocio.",
-    comingSoon: true,
-    tagline: "Software a medida para tu negocio. Muy pronto.",
+    title: "Software a medida",
+    description:
+      "Sistemas de gestión propios y desarrollos a medida para digitalizar y automatizar tu negocio.",
+    tagline: "Sistemas que ya funcionan en negocios reales, adaptados al tuyo.",
     highlights: [
-      "Sistemas de gestión a medida",
-      "Automatización de procesos repetitivos",
-      "Aplicaciones web para digitalizar tu negocio",
-      "Acompañamiento técnico continuo",
+      "Sistemas de gestión listos para instalar: talleres, laboratorios y gimnasios",
+      "Desarrollos a medida cuando ninguno de los existentes encaja",
+      "Automatización de procesos repetitivos (planillas, presupuestos, avisos)",
+      "PDF profesionales y envío por WhatsApp integrados",
+      "Instalación, capacitación y acompañamiento técnico continuo",
+      "Integración con hardware: lectores de huella, molinetes, Arduino",
     ],
-    whatsappMessage: "Hola! Quiero que me avisen cuando esté disponible el servicio de SaaS a medida.",
+    process: [
+      {
+        title: "Nos contás cómo trabajás hoy",
+        description: "Planillas, cuadernos, lo que uses — partimos de tu forma de trabajar real.",
+      },
+      {
+        title: "Te mostramos un sistema funcionando",
+        description: "Si alguno de nuestros sistemas ya lo resuelve, lo ves andando antes de decidir.",
+      },
+      {
+        title: "Lo adaptamos a tu negocio",
+        description: "Tu nombre, tu logo, tus datos y las funciones que te falten.",
+      },
+      {
+        title: "Instalación y acompañamiento",
+        description: "Lo dejamos andando, capacitamos a tu equipo y seguimos cerca.",
+      },
+    ],
+    whatsappMessage: "Hola! Quiero consultar por un sistema / software para mi negocio.",
   },
   {
     slug: "impresion-3d",
@@ -182,6 +221,7 @@ export const services: Service[] = [
     description: "Piezas, repuestos y prototipos impresos a pedido.",
     comingSoon: true,
     tagline: "Piezas y prototipos, impresos a medida. Muy pronto.",
+    teaser: "Estamos imprimiendo a Pluggy, nuestra mascota.",
     highlights: [
       "Piezas y repuestos descontinuados",
       "Prototipos para proyectos propios",
@@ -211,6 +251,12 @@ export interface SoftwareProduct {
   screenshots: GalleryImage[];
   /** Mensaje pre-cargado del botón de WhatsApp en la ficha del sistema. */
   whatsappMessage: string;
+  /** Rubro al que apunta, en corto (ej. "Talleres mecánicos"). */
+  sector: string;
+  /** Estado real del sistema (ej. "En producción"). */
+  status: string;
+  /** Sitio propio del sistema, si lo tiene. */
+  url?: { href: string; label: string };
 }
 
 export const softwareCatalog: SoftwareProduct[] = [
@@ -243,6 +289,9 @@ export const softwareCatalog: SoftwareProduct[] = [
       { filename: "editor-pdf.png", caption: "Editor visual del PDF de orden y presupuesto" },
     ],
     whatsappMessage: "Hola! Quiero consultar sobre FierrOS, el sistema de gestión para talleres.",
+    sector: "Talleres mecánicos",
+    status: "En producción",
+    url: { href: "https://gestiontallerfierros.com.ar", label: "gestiontallerfierros.com.ar" },
   },
   {
     slug: "labosys",
@@ -273,6 +322,8 @@ export const softwareCatalog: SoftwareProduct[] = [
       { filename: "practicas.png", caption: "Nomenclador de prácticas con precios" },
     ],
     whatsappMessage: "Hola! Quiero consultar sobre LaboSys, el sistema para laboratorios de análisis clínicos.",
+    sector: "Laboratorios de análisis clínicos",
+    status: "En desarrollo activo",
   },
   {
     slug: "gymaccess",
@@ -303,12 +354,32 @@ export const softwareCatalog: SoftwareProduct[] = [
       { filename: "config.png", caption: "Configuración: planes, motivación, WhatsApp y seguridad" },
     ],
     whatsappMessage: "Hola! Quiero consultar sobre GymAccess, el sistema de control de acceso para gimnasios.",
+    sector: "Gimnasios",
+    status: "En uso en un gimnasio real",
   },
 ];
 
 export function getSoftwareBySlug(slug: string): SoftwareProduct | undefined {
   return softwareCatalog.find((s) => s.slug === slug);
 }
+
+export interface Collaboration {
+  name: string;
+  role: string;
+  description: string;
+  url?: { href: string; label: string };
+}
+
+/** Proyectos en los que participamos junto a otros (no son productos propios del catálogo). */
+export const collaborations: Collaboration[] = [
+  {
+    name: "El Radar",
+    role: "Colaboración",
+    description:
+      "El portal comunitario de Federal: guía de negocios, farmacias de turno, transporte, radios y clima.",
+    url: { href: "https://elradar.ar/", label: "elradar.ar" },
+  },
+];
 
 export const advantages = [
   "Diagnóstico sin cargo",

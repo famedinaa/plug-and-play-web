@@ -10,7 +10,13 @@ export interface GalleryLightboxItem {
   src: string | null;
 }
 
-export function GalleryLightbox({ items }: { items: GalleryLightboxItem[] }) {
+export function GalleryLightbox({
+  items,
+  variant = "photo",
+}: {
+  items: GalleryLightboxItem[];
+  variant?: "photo" | "screen";
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const openItems = items.filter((it) => it.src);
 
@@ -43,43 +49,51 @@ export function GalleryLightbox({ items }: { items: GalleryLightboxItem[] }) {
 
   return (
     <>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <div className={`mt-12 grid gap-6 sm:grid-cols-2 ${variant === "screen" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
         {items.map((item, i) => (
-          <figure
-            key={item.filename}
-            className="overflow-hidden rounded-2xl border border-neutral-200 shadow-sm"
-          >
-            <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-3.5 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-neutral-300" />
-              <span className="h-2.5 w-2.5 rounded-full bg-neutral-300" />
-              <span className="h-2.5 w-2.5 rounded-full bg-neutral-300" />
-            </div>
-            {item.src ? (
-              <button
-                type="button"
-                onClick={() => setOpenIndex(i)}
-                className="group relative block h-56 w-full bg-neutral-50 p-3 sm:h-64"
-              >
-                <Image
-                  src={item.src}
-                  alt={item.caption}
-                  width={480}
-                  height={360}
-                  className="h-full w-full object-contain"
-                />
-                <span className="absolute inset-0 flex items-center justify-center bg-neutral-950/0 transition group-hover:bg-neutral-950/10">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/0 text-white opacity-0 shadow-md transition group-hover:bg-white group-hover:text-neutral-950 group-hover:opacity-100">
-                    <ZoomIn size={17} />
+          <figure key={item.filename} className="group">
+            <div
+              className={`overflow-hidden rounded-2xl border border-line bg-white transition group-hover:-translate-y-1 group-hover:shadow-[0_24px_48px_-24px_rgba(17,18,20,0.45)] ${
+                variant === "screen" ? "" : "aspect-square"
+              }`}
+            >
+              {variant === "screen" && (
+                <div className="flex items-center gap-1.5 border-b border-line bg-card px-3 py-2">
+                  <span className="h-2 w-2 rounded-full bg-signal" />
+                  <span className="h-2 w-2 rounded-full bg-line" />
+                  <span className="h-2 w-2 rounded-full bg-line" />
+                </div>
+              )}
+              {item.src ? (
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(i)}
+                  className={`relative block w-full cursor-zoom-in ${variant === "screen" ? "aspect-[16/10]" : "h-full"}`}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.caption}
+                    width={720}
+                    height={450}
+                    className={`h-full w-full object-cover ${variant === "screen" ? "object-top" : ""}`}
+                  />
+                  <span className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-ink text-paper opacity-0 transition group-hover:opacity-100">
+                    <ZoomIn size={16} />
                   </span>
-                </span>
-              </button>
-            ) : (
-              <div className="flex h-56 flex-col items-center justify-center gap-2 border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center text-xs text-neutral-500 sm:h-64">
-                <ImageOff size={20} />
-                <span>Foto pendiente: {item.caption}</span>
-              </div>
-            )}
-            <figcaption className="border-t border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700">
+                </button>
+              ) : (
+                <div
+                  className={`dots flex flex-col items-center justify-center gap-2 bg-card p-4 text-center text-muted ${
+                    variant === "screen" ? "aspect-[16/10]" : "h-full"
+                  }`}
+                >
+                  <ImageOff size={20} />
+                  <span className="label !text-[0.65rem]">Foto pendiente</span>
+                </div>
+              )}
+            </div>
+            <figcaption className="mt-3 flex gap-3 text-sm text-ink/75">
+              <span className="font-mono text-xs text-signal">{String(i + 1).padStart(2, "0")}</span>
               {item.caption}
             </figcaption>
           </figure>
@@ -88,7 +102,7 @@ export function GalleryLightbox({ items }: { items: GalleryLightboxItem[] }) {
 
       {current?.src && (
         <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-neutral-950/90 p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-ink/95 p-4 sm:p-8"
           onClick={close}
         >
           <button

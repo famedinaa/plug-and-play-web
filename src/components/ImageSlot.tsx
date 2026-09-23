@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import { ImageOff } from "lucide-react";
+import { Camera } from "lucide-react";
 import type { GalleryImage } from "@/lib/content";
 
 export function imageExists(folder: string, filename: string): boolean {
@@ -17,11 +17,19 @@ export function ImageSlot({
   folder = "taller",
   className = "",
   fit = "cover",
+  tone = "light",
+  width = 960,
+  height = 720,
+  priority = false,
 }: {
   image: GalleryImage;
   folder?: string;
   className?: string;
   fit?: "cover" | "contain";
+  tone?: "light" | "dark";
+  width?: number;
+  height?: number;
+  priority?: boolean;
 }) {
   const exists = imageExists(folder, image.filename);
 
@@ -30,8 +38,9 @@ export function ImageSlot({
       <Image
         src={`/images/${folder}/${image.filename}`}
         alt={image.caption}
-        width={480}
-        height={360}
+        width={width}
+        height={height}
+        priority={priority}
         className={`h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"} ${className}`}
       />
     );
@@ -39,10 +48,12 @@ export function ImageSlot({
 
   return (
     <div
-      className={`flex h-full flex-col items-center justify-center gap-2 border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center text-xs text-neutral-500 ${className}`}
+      className={`dots flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center ${
+        tone === "dark" ? "bg-ink-2 text-white/40" : "bg-card text-muted"
+      } ${className}`}
     >
-      <ImageOff size={20} />
-      <span>Foto pendiente: {image.caption}</span>
+      <Camera size={20} />
+      <span className="label !text-[0.65rem]">{image.caption}</span>
     </div>
   );
 }

@@ -1,27 +1,16 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  Wrench,
-  FlaskConical,
-  Fingerprint,
-  CheckCircle2,
-  MessageCircle,
-  type LucideIcon,
-} from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { OtherSoftware } from "@/components/OtherSoftware";
+import { PageHero } from "@/components/PageHero";
+import { Highlights } from "@/components/Highlights";
 import { Gallery } from "@/components/Gallery";
+import { CtaBand } from "@/components/CtaBand";
+import { RelatedLinks } from "@/components/RelatedLinks";
 import { ImageSlot } from "@/components/ImageSlot";
-import { softwareCatalog, getSoftwareBySlug, whatsappLink, business } from "@/lib/content";
-
-const ICONS: Record<string, LucideIcon> = {
-  wrench: Wrench,
-  "flask-conical": FlaskConical,
-  fingerprint: Fingerprint,
-};
+import { WhatsAppButton, BrowserFrame, ExternalLink } from "@/components/ui";
+import { ICONS } from "@/lib/icons";
+import { softwareCatalog, getSoftwareBySlug, business } from "@/lib/content";
 
 export function generateStaticParams() {
   return softwareCatalog.map((s) => ({ slug: s.slug }));
@@ -45,98 +34,75 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const product = getSoftwareBySlug(slug);
   if (!product) notFound();
-  const Icon = ICONS[product.icon];
+  const folder = `catalogo/${product.slug}`;
 
   return (
     <>
       <Header />
       <main className="flex-1">
-        <section className="relative overflow-hidden bg-neutral-950 text-white">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.25),transparent_45%)]" />
-          <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
-            <Link
-              href="/catalogo"
-              className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 hover:text-white"
-            >
-              <ArrowLeft size={16} />
-              Volver al catálogo
-            </Link>
-            <div className="grid gap-10 md:grid-cols-2 md:items-center">
-              <div>
-                <div className="flex items-start gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-neutral-950">
-                    <Icon size={26} />
-                  </div>
-                  <div>
-                    <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{product.name}</h1>
-                    <p className="mt-2 max-w-xl text-white/70">{product.tagline}</p>
-                  </div>
-                </div>
-                <a
-                  href={whatsappLink(product.whatsappMessage)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-400"
-                >
-                  <MessageCircle size={18} />
-                  Escribinos por WhatsApp
-                </a>
-              </div>
-              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-3.5 py-2.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                </div>
-                <div className="h-56 bg-white/5 p-2 sm:h-72">
+        <PageHero
+          back={{ href: "/catalogo", label: "Volver al catálogo" }}
+          icon={ICONS[product.icon]}
+          eyebrow={product.sector}
+          title={product.name}
+          tagline={product.tagline}
+          aside={
+            <div className="relative isolate">
+              <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-signal-soft/60" />
+              <BrowserFrame address={product.url?.label ?? `${product.slug}.local`}>
+                <div className="aspect-[16/10] bg-white">
                   <ImageSlot
                     image={product.screenshots[0]}
-                    folder={`catalogo/${product.slug}`}
-                    fit="contain"
+                    folder={folder}
+                    className="object-top"
+                    width={1440}
+                    height={900}
+                    priority
                   />
                 </div>
-              </div>
+              </BrowserFrame>
             </div>
+          }
+        >
+          <WhatsAppButton message={product.whatsappMessage} />
+          {product.url && <ExternalLink href={product.url.href} label={product.url.label} />}
+        </PageHero>
+
+        <section className="border-b border-line bg-ink py-12 text-paper">
+          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 sm:px-8 md:flex-row md:items-center md:justify-between">
+            <p className="font-display max-w-3xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
+              {product.hook}
+            </p>
+            <p className="inline-flex shrink-0 items-center gap-2 font-mono text-xs text-white/60">
+              <span className="live-dot h-2 w-2 rounded-full bg-live text-live" />
+              {product.status}
+            </p>
           </div>
         </section>
 
-        <section className="border-b border-neutral-200 bg-blue-50 py-10">
-          <p className="mx-auto max-w-3xl px-6 text-center text-xl font-bold tracking-tight text-neutral-900 md:text-2xl">
-            {product.hook}
-          </p>
-        </section>
+        <Highlights items={product.highlights} />
 
-        <section className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-2xl font-bold tracking-tight">¿Qué incluye?</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {product.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-2.5 text-neutral-700">
-                <CheckCircle2 className="mt-0.5 shrink-0 text-blue-500" size={19} />
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Gallery title="Capturas" images={product.screenshots} folder={folder} variant="screen" />
 
-        <section className="mx-auto max-w-4xl px-6 py-16 text-center">
-          <h2 className="text-2xl font-bold tracking-tight">¿Te interesa {product.name}?</h2>
-          <p className="mx-auto mt-2 max-w-md text-neutral-600">
-            Contanos sobre tu negocio y te contamos cómo instalarlo.
-          </p>
-          <a
-            href={whatsappLink(product.whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-400"
-          >
-            <MessageCircle size={18} />
-            Escribinos por WhatsApp
-          </a>
-        </section>
+        <div className="pt-20 md:pt-24">
+          <CtaBand
+            title={`¿Te interesa ${product.name}?`}
+            text="Contanos sobre tu negocio y te mostramos cómo quedaría con tu nombre y tu logo."
+            message={product.whatsappMessage}
+          />
+        </div>
 
-        <Gallery title="Capturas" images={product.screenshots} folder={`catalogo/${product.slug}`} />
-
-        <OtherSoftware excludeSlug={product.slug} />
+        <RelatedLinks
+          title="Otros sistemas"
+          items={softwareCatalog
+            .filter((s) => s.slug !== product.slug)
+            .map((s) => ({
+              href: `/catalogo/${s.slug}`,
+              icon: s.icon,
+              title: s.name,
+              description: s.description,
+            }))}
+        />
       </main>
       <Footer />
     </>
