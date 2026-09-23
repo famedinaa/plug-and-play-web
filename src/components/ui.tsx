@@ -25,23 +25,18 @@ export function WhatsAppButton({
   message,
   children = "Escribinos por WhatsApp",
   size = "md",
-  variant = "signal",
 }: {
   message: string;
   children?: React.ReactNode;
   size?: "md" | "lg";
-  /** "ink" para usarlo sobre fondos naranja. */
-  variant?: "signal" | "ink";
 }) {
   return (
     <a
       href={whatsappLink(message)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group inline-flex items-center gap-2.5 rounded-full font-semibold text-white transition hover:-translate-y-0.5 ${
-        variant === "ink"
-          ? "bg-ink hover:bg-ink-2"
-          : "bg-signal shadow-[0_8px_24px_-8px] shadow-signal/60 hover:bg-signal-dark"
+      className={`group inline-flex items-center gap-2.5 rounded-full font-semibold transition hover:-translate-y-0.5 ${
+        "bg-primary text-on-primary hover:bg-signal hover:text-on-signal"
       } ${
         size === "lg" ? "px-7 py-4 text-base" : "px-6 py-3 text-sm"
       }`}
@@ -124,7 +119,7 @@ export function BrowserFrame({
   return (
     <div
       className={`overflow-hidden rounded-xl border shadow-[0_30px_60px_-30px_rgba(17,18,20,0.45)] ${
-        dark ? "border-white/10 bg-ink-2" : "border-line bg-card"
+        dark ? "border-white/10 bg-night-2" : "border-line bg-card"
       } ${className}`}
     >
       <div

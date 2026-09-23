@@ -102,7 +102,7 @@ export function GalleryLightbox({
 
       {current?.src && (
         <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-ink/95 p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-night/95 p-4 sm:p-8"
           onClick={close}
         >
           <button

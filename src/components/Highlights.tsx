@@ -9,7 +9,7 @@ export function Highlights({ items, title = "¿Qué incluye?" }: { items: string
           <SectionLabel>Detalle</SectionLabel>
           <h2 className="font-display mt-5 text-4xl font-bold tracking-tight md:text-5xl">{title}</h2>
         </div>
-        <ul className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
+        <ul className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 sm:[&>li:last-child:nth-child(odd)]:col-span-2">
           {items.map((h, i) => (
             <li key={h} className="flex gap-4 bg-card p-6">
               <span className="font-mono text-sm text-signal">{String(i + 1).padStart(2, "0")}</span>

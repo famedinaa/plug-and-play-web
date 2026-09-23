@@ -15,12 +15,12 @@ function CardHeader({ service, tone = "dark" }: { service: Service; tone?: "dark
       <div
         className={`flex h-11 w-11 items-center justify-center rounded-xl ${
           tone === "light" ? "bg-white/10 text-white" : "bg-ink text-paper"
-        } transition group-hover:rotate-[-6deg] group-hover:bg-signal group-hover:text-white`}
+        } transition group-hover:rotate-[-6deg] group-hover:bg-signal group-hover:text-on-signal`}
       >
         <Icon size={20} />
       </div>
       <span
-        className={`flex h-9 w-9 items-center justify-center rounded-full border transition group-hover:border-signal group-hover:bg-signal group-hover:text-white ${
+        className={`flex h-9 w-9 items-center justify-center rounded-full border transition group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal ${
           tone === "light" ? "border-white/20 text-white" : "border-ink/15"
         }`}
       >
@@ -87,7 +87,7 @@ export function Services() {
               <Link
                 key={s.slug}
                 href={href}
-                className="reveal group relative flex flex-col overflow-hidden rounded-3xl bg-ink p-7 text-paper transition hover:-translate-y-1 lg:col-span-2"
+                className="on-dark reveal group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-night p-7 text-white transition hover:-translate-y-1 lg:col-span-2"
               >
                 <div className="dots pointer-events-none absolute inset-0 text-white/40 [mask-image:radial-gradient(circle_at_100%_0%,black,transparent_70%)]" />
                 <div className="relative flex flex-1 flex-col">
@@ -119,7 +119,7 @@ export function Services() {
             >
               <CardHeader service={s} />
               {s.comingSoon && (
-                <span className="label mt-6 inline-flex w-fit rounded-full bg-signal-soft px-2.5 py-1 !text-[0.65rem] text-signal-dark">
+                <span className="label mt-6 inline-flex w-fit rounded-full bg-signal-soft px-2.5 py-1 !text-[0.65rem] text-signal">
                   Próximamente
                 </span>
               )}

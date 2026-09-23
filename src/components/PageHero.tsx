@@ -44,7 +44,7 @@ export function PageHero({
               )}
               {eyebrow && <span className="label text-muted">{eyebrow}</span>}
               {badge && (
-                <span className="label rounded-full bg-signal-soft px-2.5 py-1 !text-[0.65rem] text-signal-dark">
+                <span className="label rounded-full bg-signal-soft px-2.5 py-1 !text-[0.65rem] text-signal">
                   {badge}
                 </span>
               )}

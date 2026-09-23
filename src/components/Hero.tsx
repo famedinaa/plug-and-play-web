@@ -54,9 +54,9 @@ export function Hero() {
 
         {/* Composición: foto del local + ticket de reparación + captura de un sistema propio. */}
         <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-ink sm:aspect-[5/5] lg:ml-10">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-night sm:aspect-[5/5] lg:ml-10">
             <ImageSlot image={heroImage} folder="local" tone="dark" priority width={1200} height={1200} />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-transparent" />
           </div>
 
           <div className="absolute -left-2 bottom-10 w-64 rotate-[-3deg] rounded-2xl border border-line bg-card p-5 shadow-[0_24px_48px_-24px_rgba(17,18,20,0.5)] sm:left-0 sm:w-72">

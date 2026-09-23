@@ -4,12 +4,12 @@ import { business, services, softwareCatalog } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-ink text-white/60">
+    <footer className="on-dark border-t border-white/10 bg-night text-white/60">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="" width={40} height={40} className="rounded-lg bg-white p-1" />
-            <span className="font-display text-xl font-bold text-white">{business.name}</span>
+            <span className="font-brand text-2xl font-light lowercase tracking-[-0.04em] text-white">{business.name}</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">{business.description}</p>
           <p className="mt-4 text-sm">{business.address}</p>
@@ -49,9 +49,9 @@ export function Footer() {
       <div className="overflow-hidden">
         <p
           aria-hidden
-          className="font-display mx-auto max-w-7xl translate-y-[18%] px-5 text-[clamp(4rem,17vw,15rem)] font-extrabold leading-none tracking-[-0.05em] text-white/[0.06] sm:px-8"
+          className="font-brand mx-auto max-w-7xl translate-y-[22%] whitespace-nowrap px-5 text-[clamp(3rem,12.5vw,11.5rem)] font-light leading-none tracking-[-0.05em] text-white/[0.08] sm:px-8"
         >
-          plug&amp;play
+          plug and play
         </p>
       </div>
 

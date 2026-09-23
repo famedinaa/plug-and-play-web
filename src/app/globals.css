@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 /*
- * Paleta cerrada del sitio. Si hace falta un color nuevo, sumarlo acá como
- * token en vez de usar clases sueltas de Tailwind (neutral-*, blue-*, etc.).
+ * Paleta cerrada del sitio: blanco, negro y grises, más un único acento.
+ * - Tema:   data-theme en <html> ("light" | "dark"), ver brandTheme en content.ts.
+ * - Acento: data-accent en <html> ("mono" | "morado" | "vino"), ver brandAccent.
+ * Si hace falta un color nuevo, sumarlo acá como token.
+ *
+ * ink = color del texto principal (y de los "chips" invertidos).
+ * night = fondo de las secciones oscuras (franja, proceso, contacto, footer):
+ *         es oscuro en los dos temas.
  */
 @theme {
-  --color-ink: #111214;
-  --color-ink-2: #1c1d21;
-  --color-paper: #f4f1ea;
-  --color-card: #fbfaf6;
-  --color-line: #e2dccf;
-  --color-muted: #6c675c;
-  --color-signal: #ff5a1f;
-  --color-signal-dark: #e0440c;
-  --color-signal-soft: #ffe4d6;
+  --color-ink: #0f0f0f;
+  --color-paper: #f7f7f7;
+  --color-card: #ffffff;
+  --color-line: #e3e3e3;
+  --color-muted: #6b6b6b;
+  --color-night: #0f0f0f;
+  --color-night-2: #1b1b1b;
+  --color-signal: #111111;
+  --color-signal-dark: #333333;
+  --color-signal-soft: #ebebeb;
+  /* Color del texto que va encima de un fondo "signal". */
+  --color-on-signal: #ffffff;
+  /* Botón principal: negro sobre claro, blanco sobre oscuro. */
+  --color-primary: #0f0f0f;
+  --color-on-primary: #ffffff;
   --color-live: #1fa35c;
+}
+
+/* ── Tema oscuro ─────────────────────────────────────────── */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #f0f0f0;
+  --color-paper: #0e0e0e;
+  --color-card: #171717;
+  --color-line: #2a2a2a;
+  --color-muted: #9a9a9a;
+  --color-night: #000000;
+  --color-night-2: #121212;
+  --color-signal-soft: #1f1f1f;
+}
+
+/* ── Acentos sobre fondo claro ───────────────────────────── */
+
+:root[data-accent="morado"] {
+  --color-signal: #5b3aa0;
+  --color-signal-dark: #472c80;
+  --color-signal-soft: #ece7f6;
+}
+
+:root[data-accent="vino"] {
+  --color-signal: #7d1d3f;
+  --color-signal-dark: #621631;
+  --color-signal-soft: #f5e3e9;
+}
+
+/*
+ * ── Acentos sobre fondo oscuro ──────────────────────────────
+ * En el tema oscuro (todo el sitio) y en las secciones .on-dark del tema claro,
+ * el acento se aclara para que se lea sobre negro. En "mono" pasa a blanco,
+ * y el texto encima pasa a negro.
+ */
+:root[data-theme="dark"],
+:root .on-dark {
+  --color-primary: #ffffff;
+  --color-on-primary: #0f0f0f;
+  --color-signal: #ffffff;
+  --color-signal-dark: #d6d6d6;
+  --color-on-signal: #111111;
+}
+
+:root[data-accent="morado"][data-theme="dark"],
+:root[data-accent="morado"] .on-dark {
+  --color-signal: #b9a2ec;
+  --color-signal-dark: #a58ae3;
+  --color-signal-soft: #221a33;
+  --color-on-signal: #170d2c;
+}
+
+:root[data-accent="vino"][data-theme="dark"],
+:root[data-accent="vino"] .on-dark {
+  --color-signal: #c4506f;
+  --color-signal-dark: #8c2b4a;
+  --color-signal-soft: #2a1119;
+  --color-on-signal: #ffffff;
+}
+
+/* El logo es un PNG negro sobre blanco: en claro se funde con multiply, en oscuro se invierte. */
+.logo-mark {
+  mix-blend-mode: multiply;
+}
+
+:root[data-theme="dark"] .logo-mark {
+  filter: invert(1);
+  mix-blend-mode: screen;
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-bricolage);
+  /* Tipografía del logo (Comfortaa): solo para piezas de marca, no para texto corrido. */
+  --font-brand: var(--font-comfortaa);
 }
 
 body {
@@ -30,7 +113,7 @@ body {
 
 ::selection {
   background: var(--color-signal);
-  color: white;
+  color: var(--color-on-signal);
 }
 
 /* Fondo de puntos tipo protoboard — el motivo gráfico del sitio. */

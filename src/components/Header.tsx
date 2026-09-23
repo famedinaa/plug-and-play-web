@@ -23,8 +23,8 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           {/* El logo tiene fondo blanco: multiply lo funde con el papel. */}
-          <Image src="/logo.png" alt="" width={40} height={40} className="mix-blend-multiply" priority />
-          <span className="font-display text-lg font-bold tracking-tight whitespace-nowrap">
+          <Image src="/logo.png" alt="" width={40} height={40} className="logo-mark" priority />
+          <span className="font-brand text-xl font-light lowercase tracking-[-0.04em] whitespace-nowrap">
             {business.name}
           </span>
         </Link>
@@ -49,7 +49,7 @@ export function Header() {
             href={whatsappLink("Hola! Quiero hacer una consulta.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition hover:bg-signal"
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition hover:bg-signal hover:text-on-signal"
           >
             <MessageCircle size={16} />
             <span className="hidden sm:inline">Escribinos</span>

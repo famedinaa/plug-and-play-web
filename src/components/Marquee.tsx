@@ -16,10 +16,10 @@ const ITEMS = [
 export function Marquee() {
   const row = [...ITEMS, ...ITEMS];
   return (
-    <div className="overflow-hidden border-y border-ink bg-ink py-4 text-paper" aria-hidden>
+    <div className="on-dark overflow-hidden border-y border-white/10 bg-night py-4 text-white" aria-hidden>
       <div className="marquee-track flex w-max items-center gap-8 whitespace-nowrap">
         {row.map((item, i) => (
-          <span key={i} className="font-display flex items-center gap-8 text-xl font-semibold tracking-tight sm:text-2xl">
+          <span key={i} className="font-brand flex items-center gap-8 text-xl lowercase tracking-[-0.03em] sm:text-2xl">
             {item}
             <span className="h-2.5 w-2.5 rotate-45 bg-signal" />
           </span>

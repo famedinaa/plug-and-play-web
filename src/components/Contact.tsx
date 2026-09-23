@@ -13,7 +13,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contacto" className="relative scroll-mt-20 overflow-hidden bg-ink py-24 text-paper md:py-32">
+    <section id="contacto" className="on-dark relative scroll-mt-20 overflow-hidden bg-night py-24 text-white md:py-32">
       <div className="dots pointer-events-none absolute inset-0 text-white/20 [mask-image:radial-gradient(circle_at_0%_0%,black,transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionLabel index="05" tone="light">

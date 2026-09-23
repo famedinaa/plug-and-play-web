@@ -35,7 +35,7 @@ export default function CatalogoPage() {
                   key={s.slug}
                   className="reveal group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-card transition hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(17,18,20,0.4)]"
                 >
-                  <div className="bg-signal-soft/60 p-5 pb-0">
+                  <div className="bg-line/60 p-5 pb-0">
                     <BrowserFrame className="translate-y-2 rounded-b-none transition group-hover:translate-y-0">
                       <div className="aspect-[16/10] bg-white">
                         <ImageSlot

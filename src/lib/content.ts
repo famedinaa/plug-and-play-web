@@ -1,6 +1,15 @@
 // Contenido editable del sitio. Los valores marcados "COMPLETAR" son
 // placeholders — reemplazalos por los datos reales del local.
 
+/**
+ * Color de acento del sitio. La identidad de Plug and Play es blanco y negro:
+ * "mono" la respeta tal cual; "morado" y "vino" suman un único color.
+ */
+export const brandAccent: "mono" | "morado" | "vino" = "vino";
+
+/** Tema del sitio: "dark" (fondo negro) o "light" (fondo blanco). */
+export const brandTheme: "dark" | "light" = "light";
+
 export const business = {
   name: "Plug and Play",
   description:

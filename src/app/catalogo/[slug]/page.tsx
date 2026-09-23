@@ -48,7 +48,7 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
           tagline={product.tagline}
           aside={
             <div className="relative isolate">
-              <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-signal-soft/60" />
+              <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-line/60" />
               <BrowserFrame address={product.url?.label ?? `${product.slug}.local`}>
                 <div className="aspect-[16/10] bg-white">
                   <ImageSlot
@@ -68,7 +68,7 @@ export default async function SoftwarePage({ params }: { params: Promise<{ slug:
           {product.url && <ExternalLink href={product.url.href} label={product.url.label} />}
         </PageHero>
 
-        <section className="border-b border-line bg-ink py-12 text-paper">
+        <section className="on-dark border-b border-line bg-night py-12 text-white">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 sm:px-8 md:flex-row md:items-center md:justify-between">
             <p className="font-display max-w-3xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
               {product.hook}

@@ -49,7 +49,7 @@ export function ImageSlot({
   return (
     <div
       className={`dots flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center ${
-        tone === "dark" ? "bg-ink-2 text-white/40" : "bg-card text-muted"
+        tone === "dark" ? "bg-night-2 text-white/40" : "bg-card text-muted"
       } ${className}`}
     >
       <Camera size={20} />

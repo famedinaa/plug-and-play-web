@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque, Comfortaa } from "next/font/google";
 import "./globals.css";
+import { brandAccent, brandTheme } from "@/lib/content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,13 @@ const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
 });
 
+/** Tipografía del logo ("plug and play" en minúsculas). */
+const comfortaa = Comfortaa({
+  variable: "--font-comfortaa",
+  subsets: ["latin"],
+  weight: ["300", "400"],
+});
+
 export const metadata: Metadata = {
   title: "Plug and Play — Reparación de PCs, celulares y software a medida en Federal",
   description:
@@ -31,7 +39,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased scroll-smooth`}
+      data-accent={brandAccent}
+      data-theme={brandTheme}
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${comfortaa.variable} h-full antialiased scroll-smooth`}
     >
       <body className="flex min-h-full flex-col bg-paper font-sans text-ink">{children}</body>
     </html>

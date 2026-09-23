@@ -53,7 +53,7 @@ export function Projects() {
                   <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                     <Link
                       href={`/catalogo/${p.slug}`}
-                      className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-signal"
+                      className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-signal hover:text-on-signal"
                     >
                       Ver ficha completa
                       <ArrowRight size={16} className="transition group-hover:translate-x-1" />
@@ -67,7 +67,7 @@ export function Projects() {
                 </div>
 
                 <div className={`relative isolate lg:col-span-7 ${flipped ? "lg:order-1 lg:col-start-1" : ""}`}>
-                  <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-signal-soft/60 md:-inset-10" />
+                  <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-line/60 md:-inset-10" />
                   <BrowserFrame address={p.url?.label ?? `${p.slug}.local`}>
                     <div className="aspect-[16/10] bg-white">
                       <ImageSlot
@@ -115,9 +115,9 @@ export function Projects() {
           ))}
           <Link
             href="/servicios/saas-a-medida"
-            className="reveal group flex flex-col justify-between rounded-3xl bg-signal p-8 text-white transition hover:bg-signal-dark"
+            className="reveal group flex flex-col justify-between on-dark rounded-3xl bg-night p-8 text-white transition hover:bg-signal-dark"
           >
-            <p className="label text-white/75">¿Tu rubro no está?</p>
+            <p className="label text-signal">¿Tu rubro no está?</p>
             <div>
               <h3 className="font-display mt-4 text-3xl font-bold tracking-tight">
                 Lo desarrollamos a medida.

@@ -30,7 +30,7 @@ export function RelatedLinks({ title, items }: { title: string; items: RelatedIt
                 className="group flex flex-col rounded-3xl border border-line bg-card p-6 transition hover:-translate-y-1 hover:border-ink"
               >
                 <div className="flex items-start justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-paper transition group-hover:bg-signal">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-paper transition group-hover:bg-signal group-hover:text-on-signal">
                     <Icon size={18} />
                   </span>
                   <ArrowUpRight size={18} className="text-muted transition group-hover:text-signal" />
@@ -38,7 +38,7 @@ export function RelatedLinks({ title, items }: { title: string; items: RelatedIt
                 <p className="font-display mt-5 text-lg font-semibold tracking-tight">{it.title}</p>
                 <p className="mt-1 line-clamp-2 text-sm text-ink/65">{it.description}</p>
                 {it.badge && (
-                  <span className="label mt-4 w-fit rounded-full bg-signal-soft px-2 py-0.5 !text-[0.6rem] text-signal-dark">
+                  <span className="label mt-4 w-fit rounded-full bg-signal-soft px-2 py-0.5 !text-[0.6rem] text-signal">
                     {it.badge}
                   </span>
                 )}
